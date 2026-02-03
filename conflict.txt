@@ -1,1 +1,1 @@
-I like drinking tea.
+This is conflict file of master branch.
