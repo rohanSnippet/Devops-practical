@@ -1,5 +1,3 @@
-package factorial;
-
 public class Program1 {
 	
 	    public int calculate(int n) {
@@ -14,3 +12,4 @@ public class Program1 {
             System.out.println("The factorial of " + number + " is: " + result);
         }
 } 
+
