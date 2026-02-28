@@ -2,28 +2,28 @@ pipeline {
     agent any
     
     tools {
-        jdk 'JDK' // Matches the name in Global Tool Configuration
-        maven 'M3'
+        jdk 'JDK' // Ensure this matches the name in your Global Tool Configuration
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Replace with your Git repository URL
                 git 'https://github.com/rohanSnippet/Devops-practical.git'
             }
         }
 
-        stage('Build & Compile') {
+        stage('Compile') {
             steps {
-                sh 'mvn clean compile'
+                // Compile the Java file. 
+                // Note: If your file is in a folder, use: bat 'javac folderName/FactorialApp.java'
+                bat 'javac FactorialApp.java'
             }
         }
 
-        stage('Run Test/App') {
+        stage('Run & Verify') {
             steps {
-                // Assuming a simple execution to verify the factorial logic
-                sh 'mvn exec:java -Dexec.mainClass="com.example.FactorialApp"'
+                // Run the compiled class
+                bat 'java FactorialApp'
             }
         }
     }
@@ -32,15 +32,19 @@ pipeline {
         success {
             emailext (
                 subject: "SUCCESS: Build #${env.BUILD_NUMBER} - ${env.JOB_NAME}",
-                body: """Build was successful!
+                body: """Great news! The simple Java build was successful.
                          Project: ${env.JOB_NAME}
                          Build Number: ${env.BUILD_NUMBER}
-                         Check console output here: ${env.BUILD_URL}""",
+                         Console Link: ${env.BUILD_URL}""",
                 to: 'rohan110620@gmail.com'
             )
         }
         failure {
-            echo 'Build failed. No email sent for success.'
+            emailext (
+                subject: "FAILED: Build #${env.BUILD_NUMBER} - ${env.JOB_NAME}",
+                body: "The build failed. Check the syntax in your Java file or the file path.",
+                to: 'rohan110620@gmail.com'
+            )
         }
     }
 }
