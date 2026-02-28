@@ -28,23 +28,16 @@ pipeline {
         }
     }
 
-    post {
+   post {
         success {
-            emailext (
-                subject: "SUCCESS: Build #${env.BUILD_NUMBER} - ${env.JOB_NAME}",
-                body: """Great news! The simple Java build was successful.
-                         Project: ${env.JOB_NAME}
-                         Build Number: ${env.BUILD_NUMBER}
-                         Console Link: ${env.BUILD_URL}""",
-                to: 'rohan110620@gmail.com'
+            mail (
+                to: 'rohan110620@gmail.com',
+                subject: "SUCCESS: Build #${env.BUILD_NUMBER}",
+                body: "Build successful! Check it out here: ${env.BUILD_URL}"
             )
         }
         failure {
-            emailext (
-                subject: "FAILED: Build #${env.BUILD_NUMBER} - ${env.JOB_NAME}",
-                body: "The build failed. Check the syntax in your Java file or the file path.",
-                to: 'rohan110620@gmail.com'
-            )
+            echo 'Build failed.'
         }
     }
 }
