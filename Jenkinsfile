@@ -16,14 +16,14 @@ pipeline {
             steps {
                 // Compile the Java file. 
                 // Note: If your file is in a folder, use: bat 'javac folderName/FactorialApp.java'
-                bat 'javac FactorialApp.java'
+                bat 'javac Program1.java'
             }
         }
 
         stage('Run & Verify') {
             steps {
                 // Run the compiled class
-                bat 'java FactorialApp'
+                bat 'java Program1'
             }
         }
     }
