@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Replace with your Git repository URL
-                git 'https://github.com/your-repo/java-factorial.git'
+                git 'https://github.com/rohanSnippet/Devops-practical.git'
             }
         }
 
@@ -36,7 +36,7 @@ pipeline {
                          Project: ${env.JOB_NAME}
                          Build Number: ${env.BUILD_NUMBER}
                          Check console output here: ${env.BUILD_URL}""",
-                to: 'your-email@example.com'
+                to: 'rohan110620@gmail.com'
             )
         }
         failure {
